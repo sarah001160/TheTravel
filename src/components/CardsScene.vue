@@ -11,7 +11,6 @@ const active =ref(false);//是否啟動ModalBox
 function checkClick(item){//當前點擊的card
     openModal();
     tempObj.value=item;
-    //console.log(tempObj.value)
 }
 function openModal(){
    active.value=true;
@@ -140,7 +139,7 @@ $secondary:#23BFD4;
         border-radius:10px;
         overflow:hidden;
     }
-    .title{ /*section的h3標題 例如:熱門景點*/
+    .title{ 
         padding-left:10px;
         border-left:18px solid $secondary;
         margin-bottom:20px;

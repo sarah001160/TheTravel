@@ -1,5 +1,4 @@
 <script setup>
-    import {ref, onMounted, computed} from 'vue';
     import Scene from './Scene.vue';
     import recentActivity from './RecentActivity.vue';
     import HotSpots from './HotSpots.vue';
@@ -16,12 +15,12 @@
     <hot-spots></hot-spots>
     <popular-activity></popular-activity>
     <popular-city></popular-city>
-    <popular-food></popular-food><!--尚未建立api-->
-    <popular-hotel></popular-hotel><!---尚未設定CSS-->
-  
- 
+    <popular-food></popular-food>
+    <popular-hotel></popular-hotel>
+    <!--全局元件Footerglobal.vue-->
+    <footerglobal></footerglobal>
 
-    
+
   </div>
 </template>
 

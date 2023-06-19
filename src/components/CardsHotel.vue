@@ -11,7 +11,6 @@ const active =ref(false);//是否啟動ModalBox
 function checkClick(item){//當前點擊的card
     openModal();
     tempObj.value=item;
-   // console.log(tempObj.value)
 }
 function openModal(){
    active.value=true;

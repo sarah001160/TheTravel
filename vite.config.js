@@ -5,7 +5,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:'/the-tarvel-project',
+  base:'/TheTravel',
   plugins: [vue()],
   resolve: {
     alias: {

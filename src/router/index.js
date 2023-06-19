@@ -11,7 +11,7 @@ const router = createRouter({
       component:HomePage,
     },
     {
-      path:'/cardsactivity',//預設出現所有活動，所以空字串
+      path:'/cardsactivity',//所有活動
       name:'CardsActivity',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -41,4 +41,4 @@ const router = createRouter({
 
 export default router
 
-// router.beforeEach((to)=>{console.log(to)})
+
