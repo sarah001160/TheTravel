@@ -1,0 +1,927 @@
+@import './base.css'; /*all colors variables*/
+/*main.css管理所有*/
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  list-style:none;
+  font-size:16px;
+  -moz-font-family:'PingFang TC';
+  font-family:'PingFang TC';
+}
+
+$primary:var( --vt-c-white);
+$secondary:#23BFD4;
+
+/*mixin */
+@mixin mobile{
+  @media(279px< width <=765px){
+    @content;
+  }
+}
+@mixin tab{
+  @media(765px< width<=976px){
+    @content;
+  }
+}
+
+.fBold{ font-weight:bold;}
+.f13{ font-size:13px;}
+.f16{font-size:16px;}
+.f20{ font-size:20px;}
+.f28{ font-size:28px;}
+.title{ /*section的h3標題 例如:熱門景點*/
+    padding-left:10px;
+    border-left:18px solid $secondary;
+    margin-bottom:20px;
+}
+.wordBreak{
+  word-break:break-all;
+}
+.rotate180{ //用在180度旋轉
+  transform:rotate(180deg);
+}
+
+.imgIncard{ //小卡片的風景圖
+  width:100%;
+  height:50%;
+  border-radius:10px;
+  overflow:hidden;
+}
+.timetag{
+  color:grey;
+  margin:1px 0 1px 10px;
+  
+}
+.topictag{ /*小卡片的標題活動名稱*/
+  font-weight:bold;
+  margin:1px 10px 1px 10px;
+  overflow:hidden;
+ //background:red;
+}
+.locationtag{
+  color:#23BFD4;
+  margin:2px 0 2px 10px;
+  max-width:100px;
+}
+.annualtag{//標籤分類 ex:年度活動
+  width:65px;
+  min-height:30px;
+  padding:5px;
+  margin:8px 0 1px 10px;
+  background-color:#e8dcdc;
+  border-radius:10px;
+  font-size:12px;
+  display:block;
+  text-align:center;
+  cursor:pointer;
+  &:hover{
+    background:white;
+    border:1px solid #e8dcdc;
+    box-sizing:border-box;
+  }
+}
+.radioLabel{ //<> icon的設定
+  display:inline-block;
+  width:30px;
+  height:40px;
+  padding:10px;
+  box-sizing:border-box;
+  background-color:grey;
+  margin-left:20px;
+  text-align:center;
+}
+
+#app{
+  width:100%;
+  min-height:100vh;
+  margin:0;
+  padding:0;
+  font-weight: normal;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; 將畫面一分為二欄 */
+  nav{
+    //background:orange;
+    .routerlink{
+     margin:20px;
+    }
+  }
+
+  
+}
+
+/*HomePage.vue---------------------------------------*/
+#HomePage{
+  width:100%;
+  min-height:100vh;
+  -moz-font-family:'PingFang TC';
+  font-family:'PingFang TC';
+}
+  
+
+/*Scene-----------------------------------------------*/
+section.scene{
+  width:100%;
+  overflow:hidden;
+  min-height:720px;
+  padding:29px 98.15px;
+  margin:0;
+  background-image:url('../assets/img/unsplash_L6xHmv2R3G4@2x.png');
+  background-position:center;
+  background-size:cover;
+  overflow:-moz-hidden-unscrollable;
+  @include tab{
+    padding:0;
+    width:100%;
+  }
+  @include mobile{
+    padding:0;
+    width:100%;
+  }
+  div.logozone{
+    a{
+      margin-right:0.9rem;
+    }
+  @include tab{
+    transform:translate(5%,20px);
+  }
+  @include mobile{
+    transform:translate(5%,20px);
+  }
+  }
+  h1{
+    color:$primary;
+    font-size:36px;
+    text-align:center;
+    text-shadow:0px 0px 10px black;
+    margin-top:112px;
+  }
+  .wrapperArea{
+    display:flex;
+    margin:48px auto 0 auto;
+    border-radius:20px;   
+    background:red;
+    width:60%;
+    position:relative; //dropDown and button
+    @include tab{
+      width:90%;
+    }
+    @include mobile{
+      width:90%;
+    }
+    .wrapper{
+        display:flex;
+        flex-direction:row;
+        background-color:$primary;
+        width:100%;
+        padding:10px;
+        border-top-left-radius:5px;
+        border-bottom-left-radius:5px;
+        @include mobile{
+          flex-wrap:wrap;
+        }
+        div{
+          width:100px;
+          text-align:left;
+          padding-left:20px;
+          box-sizing:border-box;
+          border-right:1px solid black;
+          @include mobile{
+            padding-left:5px;
+            width:50%;
+            &:nth-child(2){ //div:nth-child(2)
+              border-right:none;
+              border-top-right-radius:5px;
+              border-bottom-right-radius:5px;
+            }
+          }
+          cursor:pointer;
+          .dropDown{
+              display:none;
+              position:absolute;
+              top:100%;
+              left:-10px;
+              background:$primary;
+              box-shadow:0.5px 0.5px 1px black;
+              z-index:5;
+              border-radius:5px;
+            &.spot{ //.dropDown.spot display none
+              width:auto;
+              height:200px;
+            }
+            &.category{ //.dropDown.category
+              width:auto;
+              height:auto; //156px
+              @include mobile{
+                min-width:auto;
+              }
+            }
+          }
+          &:hover{ //div:hover          
+            .dropDown{
+              display:block;
+              &.spot{ //div:hover時 .dropDown.spot
+                display:flex;
+                flex-direction:column;
+                min-width:400px;
+                height:auto;
+                padding-right:10px;
+                padding-left:10px;
+                >div:nth-child(1){
+                  border:none;
+                  //background:yellow;
+                  width:100%;
+                  display:inline-block;
+                  padding-top:10px;
+                  padding-bottom:10px;
+                  transform:translateX(-5px);
+                  input[type=checkbox]{
+                    width:16px;
+                    height:16px;
+                  }
+                  label{
+                    cursor:pointer;
+                    margin-left:10px;
+                    font-size:16px;
+                  }
+                }
+                div.Regions{
+                  width:100%;
+                  border:none;
+                  display:flex;
+                  flex-direction:row;
+                  padding:0;
+                  transform:translateX(-5px);
+                  >div{ //5個欄位*1
+                    flex-grow:1 0 20%;//五分之一
+                    width:20%;
+                    margin-bottom:20px;
+                    border:none;
+                   // background:pink;
+                    display:flex;
+                    flex-direction:column;
+                    justify-content:top;//內容物排列
+                    align-items:center;
+                    text-align:center;
+                    margin-left:0;
+                    h4{
+                      width:100%;
+                      height:auto;
+                      border-bottom:3px solid black;
+                      text-align:center;
+                      font-size:16px;
+                    }
+                    span{
+                      width:100%;
+                      display:block;
+                      padding:13px 1px;
+                     // border:1px solid red;
+                      font-size:16px;
+                      &:hover{
+                        background:$secondary;
+                        color:$primary;
+                      }
+                    }
+                  }
+                }
+                
+                
+              }
+              &.category{ //div:hover時 .dropDown.category
+                display:grid;
+                grid-template-columns:auto auto;
+                padding:16px;
+                @include mobile{
+                  padding:5px;
+                }
+                div.mark{
+                  border:none;
+                  margin-top:2px;
+                  margin-right:5px;
+                  width:88px;
+                  height:54px;
+                  position:relative;
+                  img{
+                    position:absolute;
+                    top:15px;
+                    left:12px;
+                    filter:brightness(100%);
+                    &:nth-child(1){ filter:brightness(0%);} //img
+                  }    
+                  p{
+                    position:absolute;
+                    top:12px;
+                    left:45px;
+                    font-size:17px;
+                    color:black;
+                  }
+                  &:hover{ //.mark:hover
+                    background-color:$secondary;
+                    img{
+                      filter:brightness(0%);
+                      &:nth-child(1){
+                        filter:brightness(100%);
+                      }
+                    }
+                    p{color:$primary;}
+                    
+                  }
+                  
+                }
+                
+              }
+            }
+          }
+                
+        }
+        >input[type="text"]{
+          border:none;
+          flex:1 2 100px; 
+          padding-left:20px;
+          &:focus{
+            outline:none;
+            border:solid 2px $secondary;
+          }
+          @include mobile{display:none}  
+        }
+      
+    }
+    button{
+          width:120px;
+          top:0;
+          bottom:0;
+          flex-basis:120px;
+          border:none;
+          background:$secondary;
+          color:$primary;
+          position:relative;
+          padding:19px 0;
+          padding-left:22px;
+          box-sizing: border-box;
+          cursor: pointer;
+          border-top-right-radius:5px;
+          border-bottom-right-radius:5px;
+          img{
+            position:absolute;
+            top:27px;
+            left:10%;
+          }
+          @include mobile{display:none}
+        
+       }
+    
+  }
+  .mobileInputSearch{
+      display:none;
+      @include mobile{
+        display:block;
+        margin:5px auto;
+        width:90%;
+        display:flex;
+        flex-direction:row;
+        input{
+          width:80%;
+          padding-left:20px;
+          height:50px;
+          border:none;
+          border-top-left-radius:5px;
+          border-bottom-left-radius:5px;
+          &:focus{
+            outline:none;
+            border:solid 2px $secondary;
+          }               
+        }
+        button{
+          width:20%;
+          background:$secondary;
+          color:$primary;
+          cursor:pointer;
+          border:none;
+          position:relative;
+          border-top-right-radius:5px;
+          border-bottom-right-radius:5px;
+          img{ //放大鏡
+            position:absolute;
+            top:16px;
+            left:10%;
+          }
+        }
+      }
+      
+  }
+
+  
+}
+
+/*RecenActivity.vue------------------------------------*/
+section.recentActivity{
+    margin:28px 0 100px 0;
+    padding-left:5%;
+    padding-right:5%;
+    box-sizing:border-box;
+    //background:pink;
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    >div:nth-child(1){
+        position:relative;
+        width:100%;
+        height:80px;
+        //h3
+        .buttonsZone{
+            position:absolute;
+            top:0;
+            right:0;
+            input[type="radio"]{
+                display:none;
+            }
+            >label{ cursor:pointer;}
+            #radioPrev:checked~.labPrev, #radioNext:checked~.labNext{
+                background-color:$secondary;
+            }
+        }  
+    }
+    >div:nth-child(2){
+        width:100%;
+        min-height:100%;  
+        .activitiesContent{
+            width:100%;
+            min-height:70%;
+            #A,#B{
+                width:100%;
+                height:100%;
+                //background:orange;
+                display:flex;
+                flex-direction:row;
+                justify-content:space-between;
+                @include mobile{
+                    display:flex;
+                    flex-direction:column;
+                }
+                >div{ 
+                    width:23%;
+                    min-height:300px;
+                    //background:yellowgreen;
+                    border-radius:10px;
+                    padding-bottom:1.5rem;
+                    cursor:pointer;
+                    overflow:hidden;
+                    &:hover{
+                        box-shadow:0 0 8px grey;
+                    }
+                    @include mobile{
+                        width:100%;
+                        padding-bottom:1.5rem;
+                        margin-bottom:50px;
+                        &:last-child{
+                        display:none;
+                        }
+                    }
+                    >img:nth-child(1){ //風景圖
+                        @include tab{
+                        height:150px;
+                        }
+                        @include mobile{ 
+                        height:45%;
+                        }
+                    }
+                    //span
+                    h4{
+                        @include mobile{
+                        font-size:16px;
+                        }
+                    }
+                    >div{//locationtag
+                        img{margin-right:10px;}
+                    }
+                    span:nth-child(2){
+                        width:65px;
+                        margin-top:15px;
+                    }
+
+                }
+            }
+        }
+    }
+    .linkToRouter{
+        width:100px;
+        position:absolute;
+        right:55px;
+        top:90%;
+        border-bottom:2px solid black;
+        @include mobile{
+          top:100%;
+        }
+    }
+    
+
+}
+
+/*HotSpots.vue-----------------------------------------*/
+section.hotSpots{
+  width:100%;
+  height:auto;
+  margin:50px 0 250px 0;
+  padding-left:5%;
+  padding-right:5%;
+  box-sizing:border-box;
+ //background:pink;
+  >div:nth-child(1){
+    //background:green;
+    width:100%;
+    position:relative;
+    height:80px;
+   //h3
+    .secondbuttonsZone{
+      position:absolute;
+      top:0;
+      right:0;
+      input[type="radio"]{
+        display:none;
+        }
+   
+    }    
+  }
+  >div.forPC{ //PC版，RWD時要隱藏
+    width:100%;
+    height:auto;
+    display:flex;
+    flex-direction:row;
+    @include mobile{
+      display:none;
+    }
+    >div:nth-child(1){//大的
+      width:50%;
+      min-height:550px;
+      //background:red;
+      margin-right:20px;
+      border-radius:10px;
+      cursor:pointer;
+      &:hover{ //div1:hover
+        box-shadow:0 0 8px grey;
+      }
+      >img{
+        width:100%;
+        height:322px;
+        border-radius:10px;
+      }
+      //h4
+      //div locationtag
+        //img
+        //span
+      p{
+        margin-left:10px;
+        color:gray;
+      }  
+      
+      }
+    >div:nth-child(2){
+      width:50%;
+      //background:blue;
+      display:flex;
+      flex-direction:row;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      cursor:pointer;
+      //mobile versoin for div2
+      >div{//四個
+        width:48%;
+        min-height:280px;
+       // background:yellowgreen;
+        margin-bottom:10px;
+        border-radius:10px;
+        &:hover{
+          box-shadow:0 0 8px grey;
+        }
+        >span{
+          display:inline-block;
+        }
+      }
+    }
+    //mobile versoin for div2
+    
+  }
+  >div.forMobile{ //PC寬度下 隱藏
+     display:none;
+    @include mobile{ //mobile寬度 呈現
+        display:block;
+        width:100%;
+        height:100%;
+        //background:green;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        >div{
+          width:100%;
+          min-height:70%;
+          padding-bottom:1.5rem;
+          margin-bottom:50px;
+          border-radius:10px;  
+          cursor:pointer;
+          >span{display:inline-block;}
+        &:hover{
+          box-shadow:0 0 8px grey;
+        }
+        }
+    }
+  }
+  div.linkToRouterHotsopts{
+    //background:red;
+    width:100px;
+    position:absolute;
+    top:100%;
+    right:55px;
+    border-bottom:2px solid black;
+  }
+   
+
+}
+
+/*PopularActivity.vue-----------------------------------*/
+section.popularActivity{ 
+  width:100%;
+  //background:pink;
+  height:auto;
+  margin:100px 0 100px 0;
+  padding-left:5%;
+  padding-right:5%;
+  box-sizing:border-box;
+  position:relative;
+  >div:nth-child(1){
+    position:relative;
+    //h3
+    .popularActivityButtonsZone{
+        position:absolute;
+        top:0;
+        right:0;
+        input[type="radio"]{
+          display:none;
+          }
+    }    
+  }
+  >div:nth-child(2){
+    div.popularActivityContentforPC{ //PC寬度下呈現
+      display:block;
+      display:flex;
+      flex-direction:row;
+      width:100%;
+      justify-content:space-between;
+      @include mobile{ 
+        display:none;
+      }
+      >div:nth-child(1){ //大的框
+        width:49%;
+        min-height:550px;
+        margin-right:20px;
+        border-radius:10px;
+        cursor:pointer;
+        &:hover{ //div1:hover
+          box-shadow:0 0 8px grey;
+        }
+        >img{
+          width:100%;
+          height:322px;
+          border-radius:10px;
+        }
+        //h4 
+        //div
+        p{
+          margin-left:10px;
+          color:gray;
+        }
+      }
+      >div:nth-child(2){
+        width:50%;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:space-between;
+        >div{ //4個小框
+          width:48%;
+          min-height:280px;
+          margin-bottom:10px;
+          border-radius:10px;
+          cursor:pointer;
+          &:hover{
+             box-shadow:0 0 8px grey;
+          }
+        }
+      }
+    }
+    div.popularActivityContentforMobile{
+      display:none;
+      @include mobile{
+        display:block;
+        width:100%;
+        height:auto;
+        padding-bottom:100px;
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+        margin-bottom:100px;
+          >div{
+            width:100%;
+            min-height:300px;
+            border-radius:10px;
+            padding-bottom:1.5rem;
+            margin:50px auto;
+            cursor:pointer;
+            &:hover{
+              box-shadow:0 0 8px grey;
+            }
+            @include tab{
+              min-height:390px;
+            }
+          }
+        }
+    }
+    div.linkToRouterPopularActivity{
+      width:100px;
+      border-bottom:2px solid black;
+      position:absolute;
+      right:0;
+      top:100%;
+    }
+  }
+}
+
+/*PopularCity.vue---------------------------------------*/
+section.popularCity{
+  width:100%;
+  height:auto;
+  margin:100px 0 250px 0;
+  padding-left:5%;
+  padding-right:5%;
+  >div:nth-child(2){
+      width:100%;
+      display:flex;
+      flex-direction:row;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      >div{
+          width:24%;
+          height:200px;
+          border-radius:10px;
+          position:relative;
+          background-size:cover;
+          margin-bottom:10px;
+          @include mobile{
+            width:49%; 
+          }
+      &:nth-child(1){//台南
+          background-image:url('https://swcoast-nsa.travel/image/36703/640x480');
+      }
+      &:nth-child(2){//台北
+          background-image:url('https://images.unsplash.com/photo-1512874876683-3bb985ca85c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=876&q=80');
+      }
+      &:nth-child(3){//花蓮
+          background-image:url('https://www.eastcoast-nsa.gov.tw/image/40/640x480');
+      }
+      &:nth-child(4){//台中
+          background-image:url('https://travel.taichung.gov.tw/content/images/attractions/37724/640x480_image637395859739276834.jpg');
+      }
+      
+          >div.upperlayer{
+              position:absolute;
+              left:0;
+              right:0;
+              top:0;
+              bottom:0;
+              border-radius:10px;
+              z-index:100;
+              display:block;
+              background:rgba(11, 11, 11, 0.4);
+              cursor:pointer;
+              &:hover{
+                  background:rgba(11, 11, 11, 0.1);
+              }
+              >span{ //span
+                  position:absolute;
+                  top:50%;
+                  left:50%;
+                  transform:translate(-50%,-50%);
+                  font-size:22px;
+                  color:white;
+                  font-weight:bold;
+              }
+          }
+      }
+  }
+}
+
+/**PopularFood.vue--------------------------------------*/
+section.popularFood{
+  width:100%;
+  height:auto;
+  margin:100px 0 250px 0;
+  padding-left:5%;
+  padding-right:5%;
+  position:relative;
+  >div:nth-child(1){
+    position:relative;
+    div.PopularFoodbuttonsZone{
+      position:absolute;
+      right:0;
+      top:0;
+      >input[type="radio"]{
+        display:none;
+      }
+    }
+  }
+  >div:nth-child(2){
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    @include mobile{
+      display:flex;
+      flex-direction:column;
+      width:100%;
+    }
+    >div{//v-for
+      width:24%;
+      min-height:300px;
+      border-radius:10px;
+      cursor:pointer;
+      //img
+      //h4
+      //.locatointag
+      &:hover{
+        box-shadow:0 0 8px grey;
+      }
+      @include mobile{
+        width:100%;
+        margin:50px auto;
+        padding-bottom:30px;
+      }
+
+    }
+  }
+  div.linkToRouterFood{
+    width:100px;
+    border-bottom:2px solid black;
+    position:absolute;
+    right:55px;
+    top:100%;
+  }
+}
+
+
+/*PopularHotel.vue------------------------------------*/
+section.popularHotel{
+  width:100%;
+  height:auto;
+  margin:100px 0 100px 0;
+  padding-left:5%;
+  padding-right:5%;
+  position:relative;
+  >div:nth-child(1){
+    position:relative;
+    div.popularHotelButtonsZone{
+      position:absolute;
+      right:0;
+      top:0;
+      >input[type="radio"]{
+        display:none;
+      }
+    }
+  }
+  >div.hotelContent{
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    //background:red;
+    justify-content:space-between;
+    @include mobile{
+      display:flex;
+      flex-direction:column;
+      width:100%;
+    }
+    >div{ //v-for
+      width:24%;
+      min-height:300px;
+      border-radius:10px;
+      cursor:pointer;
+      &:hover{
+        box-shadow:0 0 8px grey;
+      }
+      @include mobile{
+        width:100%;
+        margin:50px auto;
+        padding-bottom:30px;
+      }
+    }
+  }
+  div.linkToRouterHotels{
+    width:100px;
+    border-bottom:2px solid black;
+    position:absolute;
+    right:55px;
+    top:100%;
+  }
+
+
+}
+
